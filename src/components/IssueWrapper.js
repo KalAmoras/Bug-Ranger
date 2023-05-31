@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { IssueForm } from './IssueForm'
 import { Issue } from './Issue'
 import { v4 as uuidv4 } from 'uuid'
-import { EditIssueForm } from './EditTodoFrom'
+import { EditIssueForm } from './EditIssueForm'
 
 
 
