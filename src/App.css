@@ -11,11 +11,11 @@ body {
   background: #8758ff;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /*align-items: center;*/
 }
 
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 h1 {
@@ -33,21 +33,33 @@ h1 {
 
 .TodoForm {
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .todo-input {
   outline: none;
   background: none;
   border: 1px solid #8758ff;
-  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
   margin-top: 1rem;
-  margin-bottom: 2rem;
-  width: 300px;
+  margin-bottom: 1rem;
+  width: 460px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .todo-input::placeholder {
   color: #ffffff4d;
+}
+
+select{
+  padding: 2px;
+  color: white;
+  background:#1A1A40;
+  border-radius: 5px;
+  margin: 2px;
 }
 
 .todo-btn {
@@ -56,26 +68,120 @@ h1 {
   border: none;
   padding: 0.55rem;
   cursor: pointer;
-  
+  border-radius: 5px;
+  margin: 2px;  
 }
 
-.Todo {
+.Issue { 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
   background: #8758ff;
   color: #fff;
-  padding: 0.75rem 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
   cursor: pointer;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  flex-direction: column;
+  width: 460px;
+  height: 350px;
 }
+
+
+.bug-texts{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 270px;   
+  height: 155px;
+}
+
+.bug-issue{
+  width: 270px;
+  text-align:start;
+ }
+
+.bug-info{
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  width: 270px;   
+}
+
+.bug-line{
+  align-self: baseline ;
+  width: 270px;   
+}
+
+.bug-selects{
+  padding: 10px;
+  width: 145px;
+  height: 308px;
+  border-radius: 0px 5px 0px 5px;
+  overflow: hidden;
+  align-self: flex-end;
+  flex-direction: column;
+  background-color: #fff; 
+  color:#8758ff;
+}
+
+.bug-select{
+  width: 130px;
+  margin-bottom: 10px;
+  line-height: 1.6; 
+}
+
+p{
+  width: 270px;
+}
+
+
+
+
+
+
+
+
+
+.bug-title{
+  margin-bottom: 0.5rem;
+  font-weight:600;
+  letter-spacing: 1px;  
+}
+
+.buttons-box{
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+}
+
+.bug-date{
+  font-size: smaller;
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+}
+
+
 
 .fa-trash {
   margin-left: 0.75rem;
 }
 
 .completed {
+  display: flex;
+  position: relative;
+  background:#1A1A40;
+  color: #fff;
+  border: 1px solid #8758ff;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  flex-direction: column;
+  width: 460px;
+  height: 350px;
   color: #c5aeff;
   text-decoration: line-through;
 }

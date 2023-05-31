@@ -68,3 +68,50 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+A typical bug tracker, also known as an issue tracking system, is designed to help software development teams manage and track bugs, feature requests, and other issues throughout the software development lifecycle. While different bug trackers may have varying features and capabilities, here are some common fields you would typically find in a bug tracker:
+
+Issue ID/Number: A unique identifier for each issue.
+
+Title/Summary: A concise description of the issue.
+
+Description/Details: A more detailed explanation of the problem or request.
+
+Priority: The importance or urgency assigned to the issue (e.g., high, medium, low).
+
+Severity: The impact or seriousness of the issue (e.g., critical, major, minor).
+
+Status: The current state of the issue (e.g., open, assigned, in progress, closed).
+
+Assignee: The person or team responsible for resolving the issue.
+
+Reporter: The person who reported or identified the issue.
+
+Date Created: The date when the issue was initially reported.
+
+Last Updated: The date and time of the last modification or update to the issue.
+
+Steps to Reproduce: Detailed instructions or steps to reproduce the problem.
+
+Expected Behavior: The expected outcome or behavior when the issue is resolved.
+
+Actual Behavior: The observed or current behavior of the software.
+
+Attachments: Any relevant files, screenshots, or supporting documents related to the issue.
+
+Comments/Notes: Additional information, discussions, or updates related to the issue.
+
+Related Issues/Links: Links or references to other related issues or documents.
+
+Component/Module: The specific area or module of the software where the issue is located.
+
+Version/Release: The version or release of the software in which the issue was found.
+
+Environment: Information about the hardware, operating system, and software environment where the issue occurred.
+
+Labels/Tags: Categorization or tags to help classify and filter issues (e.g., bug, feature request, enhancement).
+
+
+These fields provide a basic framework for managing and tracking issues within a bug tracker, but depending on the bug tracker's features and customization options, additional fields may be available to cater to specific needs and workflows of the development team.
