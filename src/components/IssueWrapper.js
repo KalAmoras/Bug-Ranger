@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { IssueForm } from './IssueForm'
 import { Issue } from './Issue'
 import { v4 as uuidv4 } from 'uuid'
-import { EditTodoForm } from './EditTodoFrom'
+import { EditIssueForm } from './EditTodoFrom'
 
 
 
@@ -125,7 +125,7 @@ const IssueWrapper = () => {
         <IssueForm addIssue={addIssue}/>
         {issues.map((issue,index)=>(
             issue.isEditing ? (
-                <EditTodoForm editBug={editTask} 
+                <EditIssueForm editBug={editTask} 
                 issuePrev={issue}
                 idIssue={issue.id}
                 />

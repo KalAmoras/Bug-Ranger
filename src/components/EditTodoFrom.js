@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 
-export const EditTodoForm = ({editBug, issuePrev, idIssue}) => {
+export const EditIssueForm = ({editBug, issuePrev, idIssue}) => {
    
   //TODO: Cancel edit
   
