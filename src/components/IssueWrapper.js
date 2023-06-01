@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { EditIssueForm } from './EditIssueForm'
 
 
+//TODO: Pie graph, auth, search bar, filter, prioritize 
+  //<div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } />
+
 
 const IssueWrapper = () => {
     const[issues,setIssues] = useState(()=>{
@@ -50,7 +53,6 @@ const IssueWrapper = () => {
         ])
     }
 
-
     const toggleComplete = id => {
         setIssues(
           issues.map(issue =>
@@ -67,6 +69,15 @@ const IssueWrapper = () => {
         setIssues(issues.map(issue=> issue.id === id ?
             {...issue, isEditing: !issue.isEditing}: issue))
     }
+
+    const handleCancel = id => {
+        setIssues((prevIssue) => {
+          const newIssue = [...prevIssue];
+          const originalIssue = newIssue[id];
+          newIssue[id] = { ...originalIssue, isEditing: false };
+          return newIssue;
+        });
+      };
     
     /*const editTask = (task, id) =>{
         setIssues(issues.map(issue => issue.id === id ?
@@ -128,7 +139,7 @@ const IssueWrapper = () => {
                 <EditIssueForm editBug={editTask} 
                 issuePrev={issue}
                 idIssue={issue.id}
-                />
+                onCancel={() => handleCancel(index)}                />
             ) : (
                 <Issue issue={issue}
                 key={index}

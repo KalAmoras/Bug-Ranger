@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 
-export const EditIssueForm = ({editBug, issuePrev, idIssue}) => {
+export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
    
   //TODO: Cancel edit
+
   
   const [value, setValue] = useState({
     id: idIssue,
+    isEditing: issuePrev.isEditing,
     issue: issuePrev.issue,
     line: issuePrev.line,
     error: issuePrev.error,
@@ -70,6 +72,10 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue}) => {
 
     console.log({[name]:value})        
   }
+
+  const handleCancel = () => {
+    onCancel();
+  };
 
   const handleSubmit = e =>{             
       e.preventDefault() 
@@ -209,6 +215,10 @@ return (
       <button type='submit'
         //disabled={!isValid}           
         className='todo-btn'>Edit issue</button>
+      <button type='button'
+        //disabled={!isValid}           
+        className='todo-btn'
+        onClick={handleCancel}>Cancel edit</button>
   </form>
 )
 

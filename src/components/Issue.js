@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
+//TODO: Date Updated, confirm deletion
+
+
 export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
    return (
     <div className={`${issue.completed ? 'completed' : "Issue"}`} >
