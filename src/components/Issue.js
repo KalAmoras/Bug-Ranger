@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-//TODO: Date Updated, confirm deletion
-
 
 export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
    return (
@@ -14,32 +12,32 @@ export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
           <p className="bug-issue" 
             onClick={() => toggleComplete(issue.id)}
             >{issue.issue}</p>
-          <br/>
         </div>
-        <div className='bug-info'>
+        <div className='bug-line'>
           <label className='bug-title'>Line</label>
-          <p className='bug-line'>{issue.line}</p>
+          <p>{issue.line}</p>
+        </div>
+        <div className='bug-module'>
           <label className='bug-title'>Component</label>
-          <p className='bug-line'>{issue.component}</p>
-          <br/>
+          <p>{issue.component}</p>
         </div>
 
         <div className='bug-selects'>
-          <label className='bug-title'>Error</label>
-          <p className='bug-select'>{issue.error}</p>
-          <label className='bug-title'>Severity</label>
+          {/*<label className='bug-title-select'>Error</label>
+          <p className='bug-select'>{issue.error}</p>*/}
+          <label className='bug-title-select'>Severity</label>
           <p className='bug-select'>{issue.severity}</p>
-          <label className='bug-title'>Priority</label>
+          <label className='bug-title-select'>Priority</label>
           <p className='bug-select'>{issue.priority}</p>
-          <label className='bug-title'>Status</label>
+          <label className='bug-title-select'>Status</label>
           <p className='bug-select'>{issue.statusKey}</p>
-          <label className='bug-title'>Assignee</label>
+          <label className='bug-title-select'>Assignee</label>
           <p className='bug-select'>{issue.assignee}</p>
         </div>
         
         <div className="buttons-box">
-        <FontAwesomeIcon icon={faPenToSquare} onClick={() => editIssue(issue.id)} />
-        <FontAwesomeIcon icon={faTrash} onClick={() => deleteIssue(issue.id)} />
+          <FontAwesomeIcon icon={faPenToSquare} onClick={() => editIssue(issue.id)} />
+          <FontAwesomeIcon icon={faTrash} onClick={() => deleteIssue(issue.id)} />
         </div>
         <label className="bug-date">Date Created: {issue.date}</label>
     </div>

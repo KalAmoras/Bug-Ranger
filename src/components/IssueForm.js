@@ -5,7 +5,6 @@ export const IssueForm = ({addIssue}) => {
     const [value, setValue] = useState({
       issue: "",
       line: "",
-      error: "",
       severity: "",
       priority: "",
       statusKey: "",
@@ -20,16 +19,15 @@ export const IssueForm = ({addIssue}) => {
         issue, 
         line,
         component, 
-        error, 
         priority, 
         severity,
         statusKey,
         assignee } = value
 
         if(issue !=="" && line !=="" && 
-            component !=="" && error !=="" && 
-            priority !=="" && severity !=="" && 
-            statusKey !=="" && assignee !==""){
+            component !=="" && priority !=="" && 
+            severity !=="" && statusKey !=="" && 
+            assignee !==""){
             setIsValid(true)
         }else{
           setIsValid(false)
@@ -40,8 +38,7 @@ export const IssueForm = ({addIssue}) => {
     const handleClick = () =>{   
             
       let message
-      let obj = Object.entries(value)
-      const isFilled = obj.map(x=> 
+      Object.entries(value).map(x=> 
         x[1] === "" ? message = x[0] : ""
       )         
       
@@ -57,8 +54,6 @@ export const IssueForm = ({addIssue}) => {
         ...prevVal,
         [name]: value
       }))
-
-      console.log({[name]:value})        
     }
 
     const handleSubmit = e =>{             
@@ -67,24 +62,22 @@ export const IssueForm = ({addIssue}) => {
         const { 
           issue, 
           line,
-          component, 
-          error, 
+          component,  
           priority, 
           severity,
           statusKey,
           assignee } = value      
         
         if(issue && line && component && 
-          error && priority && severity && 
+          priority && severity && 
           statusKey && assignee){
             addIssue(issue, line, 
-              component, error, priority, 
+              component, priority, 
               severity, statusKey, assignee)
 
             setValue({
               issue: "",
               line: "",
-              error: "",
               severity: "",
               priority: "",
               statusKey: "",
@@ -99,21 +92,22 @@ export const IssueForm = ({addIssue}) => {
     }
  
   return (
-    <form className='TodoForm'
+    <form className='IssueForm'
           onSubmit={handleSubmit}>
+      <div>
         <input type='text'
         name='issue'
-        className='todo-input'
+        className='issue-input'
         value={value.issue}
-
+        
         placeholder='Issue(max. 120)' 
         onChange={handleChange}
-        maxLength="178"
+        maxLength="275"
         />
 
         <input type='number'
         name='line'
-        className='todo-input'
+        className='issue-input'
         value={value.line}
         placeholder='Line' 
         onChange={handleChange}
@@ -121,26 +115,15 @@ export const IssueForm = ({addIssue}) => {
 
         <input type='text'
         name='component'
-        className='todo-input'
+        className='issue-input'
         value={value.component}
         placeholder='Component' 
         onChange={handleChange}
         maxLength="50"
         />   
+      </div>
 
-        <select
-          name="error"
-          value={value.error}         
-          onChange={handleChange}
-          >
-            <option value="" disabled hidden >Type of Error</option>
-            <option value="Syntax Error" >Syntax Error</option>
-            <option value="Logic Error">Logic Error</option>
-            <option value="Type Error">Type Error</option>
-            <option value="Runtime Error">Runtime Error</option>
-            <option value="Null Pointer Error">Null Pointer Error</option>
-            <option value="Other" >Other</option>
-        </select>
+      <div>        
         <select 
           name="severity"
           value={value.severity}          
@@ -160,23 +143,21 @@ export const IssueForm = ({addIssue}) => {
           placeholder='Priority'
           >
             <option value="" disabled hidden >Priority</option>
+            <option value="High">High</option>            
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
-            <option value="High">High</option>            
         </select>  
-        <br/>
         <select 
           name="statusKey"
           value={value.statusKey}          
           onChange={handleChange}
           >
             <option value="" disabled hidden >Status</option>
-            <option value="Open">Open</option>
             <option value="Assigned">Assigned</option>
-            <option value="In Progress">In Progress</option>
             <option value="Closed">Closed</option>            
+            <option value="In Progress">In Progress</option>
+            <option value="Open">Open</option>
         </select> 
-
         <select 
           name="assignee"
           value={value.assignee}          
@@ -187,10 +168,11 @@ export const IssueForm = ({addIssue}) => {
             <option value="James">James</option>
             <option value="Jack">Jack</option>
         </select>   
-        <br/>
+      </div>
+      
         <button type='submit'
           //disabled={!isValid}           
-          className='todo-btn'>Add issue</button>
+          className='issue-btn'>Add issue</button>
     </form>
   )
 }

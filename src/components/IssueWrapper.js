@@ -3,10 +3,12 @@ import { IssueForm } from './IssueForm'
 import { Issue } from './Issue'
 import { v4 as uuidv4 } from 'uuid'
 import { EditIssueForm } from './EditIssueForm'
+import Sorter from './Sorter'
 
 
-//TODO: Pie graph, auth, search bar, filter, prioritize 
-  //<div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } />
+/*TODO: Pie graph, auth, prioritize, better icons, logo, search as component
+navbar, add issue hidden behind button, better styling
+*/
 
 
 const IssueWrapper = () => {
@@ -21,12 +23,12 @@ const IssueWrapper = () => {
         localStorage.setItem("ISSUES", JSON.stringify(issues))
     },[issues])
 
-  
+    const [query, setQuery] = useState("")
+
     const addIssue = (
             issue, 
             line, 
             component, 
-            error, 
             priority, 
             severity, 
             statusKey, 
@@ -43,8 +45,7 @@ const IssueWrapper = () => {
                 isEditing: false,
                 line: line,
                 component: component,
-                date: datePost,
-                error: error,
+                date: datePost,                
                 severity: severity,
                 priority: priority,
                 statusKey: statusKey,
@@ -62,7 +63,9 @@ const IssueWrapper = () => {
     }
 
     const deleteIssue = id => {
-        setIssues(issues.filter(value=> value.id !== id))
+        if (window.confirm('Are you sure you wish to delete this item?')){
+        return setIssues(issues.filter(value=> value.id !== id))
+        }
     }
 
     const editIssue = id =>{
@@ -79,28 +82,16 @@ const IssueWrapper = () => {
         });
       };
     
-    /*const editTask = (task, id) =>{
-        setIssues(issues.map(issue => issue.id === id ?
-            {...issue, task, isEditing: !issue.isEditing} : issue
-        ))
-    }*/
-
+    
     const editTask = (
         idOriginal,
         issue, 
         line,
-        component, 
-        error, 
+        component,  
         priority, 
         severity,
         statusKey,
         assignee) => {
-
-            console.log(idOriginal)
-
-            issues.map(issueUnit => issueUnit.id === idOriginal ?
-                console.log(issueUnit.id, idOriginal) : 
-                console.log("diferente"))
 
             const datePost = new Date().toLocaleString()
 
@@ -113,33 +104,61 @@ const IssueWrapper = () => {
                     line: line,
                     component: component,
                     date: datePost,
-                    error: error,
                     severity: severity,
                     priority: priority,
                     statusKey: statusKey,
                     assignee: assignee,
                 } : issueUnit
             ))
-
-            issues.map(issueUnit => issueUnit.id === idOriginal ?
-                console.log(issueUnit.id, idOriginal) : 
-                console.log(issueUnit.id, idOriginal))
-            console.log(idOriginal)
-            console.log(issues)
         }
     
+    const keys = [
+        "issue", 
+        "line", 
+        "component", 
+        "priority", 
+        "severity", 
+        "statusKey",
+        "assignee"
+    ]
 
-    
+   const handleSort = (order, key) => {
+        if(order === "ASC"){
+            const sorted = [...issues].sort((a,b) =>
+                a[key] > b[key] ? 1 : -1
+            )
+            setIssues(sorted)
+        }
+        if(order === "DSC"){
+            const sorted = [...issues].sort((a,b) =>
+                a[key] < b[key] ? 1 : -1
+            )
+            setIssues(sorted)
+        }
+   }
+   
+
+
   return (
-    <div className='TodoWrapper'>
+    <div className='IssueWrapper'>
         <h1>Bug Ranger</h1>
         <IssueForm addIssue={addIssue}/>
-        {issues.map((issue,index)=>(
+        <input className='search-bar'
+            placeholder='Search your issue'
+            onChange={e=>setQuery(e.target.value)}
+            ></input>
+        <Sorter onSort={handleSort}/>
+        {issues.filter(issue=>(
+            query !== ""?
+            keys.some(key=>issue[key].includes(query)) :
+            issues
+        ))
+        .map((issue,index)=>(
             issue.isEditing ? (
                 <EditIssueForm editBug={editTask} 
                 issuePrev={issue}
                 idIssue={issue.id}
-                onCancel={() => handleCancel(index)}                />
+                onCancel={() => handleCancel(index)}/>
             ) : (
                 <Issue issue={issue}
                 key={index}

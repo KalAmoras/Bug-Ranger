@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+
+//TODO: Date Updated
+
 
 
 export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
-   
-  //TODO: Cancel edit
-
   
   const [value, setValue] = useState({
     id: idIssue,
     isEditing: issuePrev.isEditing,
     issue: issuePrev.issue,
     line: issuePrev.line,
-    error: issuePrev.error,
     severity: issuePrev.severity,
     priority: issuePrev.priority,
     statusKey: issuePrev.statusKey,
     component: issuePrev.component,
     assignee: issuePrev.assignee
   })
+  
   const [isValid, setIsValid] = useState(false)
   
-
-  console.log(issuePrev)
-  console.log(issuePrev.id)
-  console.log(value.id)
-
   
   useEffect(() => {
     const { 
       issue, 
       line,
       component, 
-      error, 
       priority, 
       severity,
       statusKey,
       assignee } = value
 
       if(issue !=="" && line !=="" && 
-          component !=="" && error !=="" && 
+          component !=="" && 
           priority !=="" && severity !=="" && 
           statusKey !=="" && assignee !==""){
           setIsValid(true)
@@ -49,11 +43,29 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
   }, [value, isValid])   
   
   
+  let useClickOutside = handler => {
+    let formRef = useRef()
+
+    useEffect(() => {
+      let switchHandler = e => {
+        if (!formRef.current.contains(e.target)){
+          handler();
+        }
+      }
+
+      document.addEventListener("mousedown", switchHandler)
+
+      return () => {
+        document.removeEventListener("mousedown", switchHandler)
+      }
+    })
+    return formRef
+  }
+
   const handleClick = () =>{
              
     let message
-    let obj = Object.entries(value)
-    const isFilled = obj.map(x=> 
+    Object.entries(value).map(x=> 
       x[1] === "" ? message = x[0] : ""
     )         
     
@@ -84,7 +96,6 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
         issue, 
         line,
         component, 
-        error, 
         priority, 
         severity,
         statusKey,
@@ -93,28 +104,13 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
         console.log(issuePrev)
         console.log(value)
         
-      if(issue && line && component && 
-        error && priority && severity && 
+      if(issue && line && component &&
+         priority && severity && 
         statusKey && assignee){
           editBug(issuePrev.id, issue, line, 
-            component, error, priority, 
+            component, priority, 
             severity, statusKey, assignee)
 
-            console.log(issuePrev)
-            console.log(value)
-
-            /*setValue({
-              issue: "",
-              line: "",
-              error: "",
-              severity: "",
-              priority: "",
-              statusKey: "",
-              component: "",
-              assignee: "",
-            })*/
-            
-       
           setIsValid(()=>false)
       }else{
         handleClick(e)
@@ -122,12 +118,17 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
       }
   }
 
+  let formRef = useClickOutside (()=>{
+    handleCancel()
+  })
+
 return (
-  <form className='TodoForm'
-        onSubmit={handleSubmit}>
+  <form className='IssueForm'
+        onSubmit={handleSubmit}
+        ref={formRef}>
       <input type='text'
       name='issue'
-      className='todo-input'
+      className='issue-input'
       value={value.issue}
 
       placeholder='Issue(max. 120)' 
@@ -137,7 +138,7 @@ return (
 
       <input type='number'
       name='line'
-      className='todo-input'
+      className='issue-input'
       value={value.line}
       placeholder='Line' 
       onChange={handleChange}
@@ -145,26 +146,12 @@ return (
 
       <input type='text'
       name='component'
-      className='todo-input'
+      className='issue-input'
       value={value.component}
       placeholder='Component' 
       onChange={handleChange}
       maxLength="50"
       />   
-
-      <select
-        name="error"
-        value={value.error}         
-        onChange={handleChange}
-        >
-          <option value="" disabled hidden >Type of Error</option>
-          <option value="Syntax Error" >Syntax Error</option>
-          <option value="Logic Error">Logic Error</option>
-          <option value="Type Error">Type Error</option>
-          <option value="Runtime Error">Runtime Error</option>
-          <option value="Null Pointer Error">Null Pointer Error</option>
-          <option value="Other" >Other</option>
-      </select>
       <select 
         name="severity"
         value={value.severity}          
@@ -214,10 +201,10 @@ return (
       <br/>
       <button type='submit'
         //disabled={!isValid}           
-        className='todo-btn'>Edit issue</button>
+        className='issue-btn'>Edit issue</button>
       <button type='button'
         //disabled={!isValid}           
-        className='todo-btn'
+        className='issue-btn'
         onClick={handleCancel}>Cancel edit</button>
   </form>
 )
