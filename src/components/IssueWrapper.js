@@ -4,10 +4,10 @@ import { Issue } from './Issue'
 import { v4 as uuidv4 } from 'uuid'
 import { EditIssueForm } from './EditIssueForm'
 import Sorter from './Sorter'
+import Logo from '../assets/BugRangerLogo.svg';
 
-
-/*TODO: Pie graph, auth, prioritize, better icons, logo, search as component
-navbar, add issue hidden behind button, better styling
+/*TODO: Pie graph, auth, prioritize, better icons, search as component
+navbar, better styling2, date updated
 */
 
 
@@ -18,12 +18,13 @@ const IssueWrapper = () => {
 
         return JSON.parse(tempJson)
     })
-
+    
     useEffect(()=>{
         localStorage.setItem("ISSUES", JSON.stringify(issues))
     },[issues])
-
+    
     const [query, setQuery] = useState("")
+    const [open, setOpen] = useState(false)
 
     const addIssue = (
             issue, 
@@ -53,6 +54,7 @@ const IssueWrapper = () => {
             }
         ])
     }
+
 
     const toggleComplete = id => {
         setIssues(
@@ -119,7 +121,8 @@ const IssueWrapper = () => {
         "priority", 
         "severity", 
         "statusKey",
-        "assignee"
+        "assignee",
+        "date"
     ]
 
    const handleSort = (order, key) => {
@@ -137,12 +140,18 @@ const IssueWrapper = () => {
         }
    }
    
+ 
+   const handleButton = ()=>{
+    setOpen(!open)
+  }
 
-
+  
   return (
     <div className='IssueWrapper'>
-        <h1>Bug Ranger</h1>
-        <IssueForm addIssue={addIssue}/>
+        <img src={Logo} alt="" className='logo'></img>
+        <br></br>
+        <button className={`add-button ${open? 'open' : 'close'}`} onClick={()=>handleButton()}>Add an Issue</button>
+        <IssueForm addIssue={addIssue} openText={open ? 'active' : 'inactive'}/>
         <input className='search-bar'
             placeholder='Search your issue'
             onChange={e=>setQuery(e.target.value)}

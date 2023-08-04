@@ -3,30 +3,48 @@
 
 :root{
   font-family: 'Roboto', sans-serif;
-  --clr-primary: hsl(197, 100%, 50%);
-  --clr-secondary: hsl(219, 100%, 50%);
-  --clr-neutral: hsl(0 0% 0%);
-  --clr-neutral-secondary: hsl(0 0% 100%);
+  --li-background: hsl(197, 100%, 89%);
+  --li-primary: hsl(197, 100%, 50%);
+  --li-secondary: hsl(219, 100%, 50%);
+  --li-font: hsl(219, 52%, 16%);
+  --dk-background: hsl(0, 0%, 25%);
+  --dk-primary: hsl(0 0% 0%);
+  --dk-secondary: hsl(17, 100%, 50%);
+  --dk-font: hsl(0, 0%, 81%);
+  --dk-font-secondary: hsl(0, 0%, 100%);
+
 
   --fs-xl: clamp(1rem, 8vw + 1rem, 3rem);
   --fs-l: clamp(0.8rem, 1vw + 1rem, 1rem);
   --fs-regular: clamp(0.6rem, 1vw + 0.5rem, 0.8rem);
   --fs-small: clamp(0.3rem, 1vw + 0.35rem, 0.7rem);  
+  --speed: 400ms;
+
+  --og-primary: #8758ff;
+  --og-secondary: #1A1A40;
 }
 
 body {
-  background: #8758ff;
+  background: var(--dk-background);
   /*
   */
   justify-content: center;
   display:flex;
   font-size: var(--fs-regular);
+  display: grid;
+}
+
+.logo{
+  color:#fff;
+  width: 300px;
+  height: 60px;
+  margin-bottom: 2rem;
 }
 
 .IssueWrapper {
   /*clamp(min value, prefered, max value)*/
   width: clamp(300px, 90vw, 700px) ;
-  background: #1A1A40;
+  background: var(--dk-primary);
   padding: max(1vh, 0.7rem);
   border-radius: 5px;
 }
@@ -37,73 +55,203 @@ h1 {
   margin-bottom: 2rem;
 }
 
+.add-button {
+  font-size: var(--fs-l);
+  margin: 2rem 1rem 2rem 1.3rem;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--dk-secondary);
+  border: var(--dk-secondary) 0.125em solid;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  background-color: var(--dk-primary);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 1em currentColor;
+  box-shadow: inset 0 0 0.9em 0 var(--dk-secondary), 0 0 0.5em 0 var(--dk-secondary);
+
+  position: relative;
+}
+
+.add-button::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  background: var(--dk-secondary);
+  top: 80%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1em) rotateX(10deg) scale(1, 0.35);
+  filter: blur(1em);
+  opacity: 0.7;
+}
+
+.add-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background-color: var(--dk-secondary);
+  transition: opacity 100ms linear;
+  z-index: -1;  
+}
+
+.add-button:hover,
+.add-button.open {
+  color: var(--dk-primary);
+  text-shadow: none;
+  background-color: var(--dk-secondary);
+  box-shadow: 0 0 3em 0.3em var(--dk-secondary);
+}
+
+
+
+
+
+
+
+.IssueDiv.active { 
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 5rem;
+  height: 8.4rem;  
+  background-color:var(--dk-primary);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: var(--speed) ease;
+}
+
+.IssueDiv.inactive {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  height: 0px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: var(--speed) ease;
+  margin: 0.4rem;
+  
+}
+
 .IssueForm {
   display: grid;
   grid-template-columns: 1fr 0.2fr;
-  grid-template-rows: minmax(3rem, 5.6rem) minmax(1rem, 2rem);
+  grid-template-rows: 2rem 2rem 2rem 2rem;
   grid-template-areas:
-    "issue-input select"
-    "issue-input issue-btn";
+    "issue-input formSelects"
+    "issue-line formSelects"
+    "issue-compo formSelects"
+    "issue-btns issue-btns";
   gap: 1rem;
   margin-bottom: 1rem;
+  background: var(--dk-primary);  
 }
+
+.grid-void{
+  grid-area: grid-void;
+}
+
 
 .issue-input {
   grid-area: issue-input;
   outline: none;
   background: none;
-  border: 1px solid #8758ff;
+  border: 1px solid var(--dk-font);
   border-radius: 5px;
   padding: 0.5rem 0.5rem;
-  margin-bottom: 1.2rem;
   color: #fff;
-  display: flex;
-  width: clamp(5rem, 95%, 35rem);
+  width: clamp(3rem, 95%, 35rem);
+  height: clamp(1rem, 100%, 1.2rem);
+  margin-bottom: 1rem;
 }
 
-.issue-input::placeholder {
-  color: #ffffff4d;
+.issue-line {
+  grid-area: issue-line;
+  outline: none;
+  background: none;
+  border: 1px solid var(--dk-font);
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+  color: #fff;
+  display: flex;
+  width: clamp(3rem, 95%, 35rem);
+  height: clamp(1rem, 100%, 1.2rem);
+}
+
+.issue-compo {
+  grid-area: issue-compo;
+  outline: none;
+  background: none;
+  border: 1px solid var(--dk-font);
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  display: flex;
+  width: clamp(3rem, 95%, 35rem);
+  height: clamp(1rem, 100%, 1.2rem);
+}
+
+
+.formSelects{
+  grid-area: formSelects;
+  display: flex;
+  flex-direction: column;
 }
 
 select{
   grid-area: select;
   padding: 2px;
+  height: 2rem;
   color: white;
-  background:#1A1A40;
+  background:var(--dk-background);
   border-radius: 5px;
   display: flex;
-  margin-bottom: 0.15rem;  
+  height: clamp(1.6rem, 100%, 1.2rem);
+  margin-bottom: 0.85rem;  
+}
+
+.issue-btns{
+  grid-area: issue-btns;
 }
 
 .issue-btn {
-  grid-area: issue-btn;
-  background: #8758ff;
-  color: #fff;
+  background: var(--dk-secondary);
+  color: var(--dk-font);
   border: none;
-  padding: 0.55rem;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  width: 6rem;
+  height: 2rem;
 }
 
 .search-bar{
   outline: none;
-  background: #fff;
-  border: 1px solid #8758ff;
+  background: var(--dk-primary);
+  border: 1px solid var(--dk-font);
   border-radius: 5px;
   padding: 0.5rem 0.5rem;
-  margin-bottom: 1.2rem;
-  color:#1A1A40;
+  margin: 1rem 1rem 2rem 1.2rem;
+  color:var(--dk-font);
 }
 
 .sort-btn{
   outline: none;
-  background: none;
-  border: 1px solid #8758ff;
+  background: var(--dk-background);
+  border: 1px solid var(--dk-font);
   border-radius: 5px;
   padding: 0.2rem;
+  margin-top: 0.4rem;
   margin-bottom: 1.2rem;
   margin-left: clamp(0.1rem, 0.5vh, 1rem);
-  color: #fff;
+  color: var(--dk-font-secondary);
   width: clamp(4rem, 1vh + 4rem, 4.2rem);
   font-size: var(--fs-small);  
 }
@@ -112,14 +260,15 @@ select{
   color: #fff;
   grid-area: bug-texts;
   margin-top: 0.3rem;
-  background-color: #1A1A40;
-  border-radius: 15px 15px 15px 15px;
+  background-color: var(--dk-background);
+  border-radius: 10px 10px 10px 10px;
   margin-right: 0.2rem;
+  padding: 0.3rem;
 }
 
 .Issue { 
-  background: #8758ff;
-  color: #fff;
+  background: var(--dk-background);
+  color:var(--dk-font);
   border-radius: 5px;
   margin-bottom: 0.6rem;
   cursor: pointer;
@@ -169,7 +318,7 @@ select{
   padding: max(0.6vh, 0.5rem);
   grid-area: bug-texts;
   font-size: var(--fs-l);
-  background-color: #1A1A40;
+  background-color: var(--dk-primary);
   border-radius: 15px 15px 15px 15px;
   background-position:center;
   background-clip:padding-box;
@@ -197,8 +346,8 @@ select{
   grid-area: bug-selects;
   border-radius: 0px 5px 0px 5px;
   overflow: hidden;
-  background-color: #fff; 
-  color:#8758ff;
+  background-color: var(--dk-font);
+  color:var(--dk-primary);
   padding: 0.7rem;
   align-content: center;
   
@@ -244,17 +393,18 @@ p{
 }
 
 .fa-pen-to-square{
-  background-color: #1A1A40;
+  background-color: var(--dk-secondary);
   background-position:center;
   background-clip:padding-box;
   padding: 0.3rem;
   border-radius: 20%;
   height: clamp(0.8rem, 1vh + 0.5rem, 5rem);
-  width: auto; 
+  width: auto;
+  color: #fff;
 }
 
 .fa-trash {
-  background-color: #1A1A40;
+  background-color: var(--dk-secondary);
   background-position:center;
   background-clip:padding-box;
   padding: 0.3rem;
@@ -262,6 +412,8 @@ p{
   margin-left: 0.3rem;
   height: clamp(0.8rem, 1vh + 0.5rem, 5rem);
   width: auto; 
+  color: #fff;
+
 }
 
 .completed {

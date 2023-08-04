@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const IssueForm = ({addIssue}) => {
+export const IssueForm = ({addIssue, openText}) => {
     
     const [value, setValue] = useState({
       issue: "",
@@ -35,8 +35,8 @@ export const IssueForm = ({addIssue}) => {
 
     }, [value, isValid])   
     
-    const handleClick = () =>{   
-            
+    const handleValidation = () =>{ 
+
       let message
       Object.entries(value).map(x=> 
         x[1] === "" ? message = x[0] : ""
@@ -86,20 +86,21 @@ export const IssueForm = ({addIssue}) => {
             })
             setIsValid(()=>false)
         }else{
-          handleClick(e)
+          handleValidation(e)
           return
         }
     }
+
  
   return (
-    <form className='IssueForm'
+
+    <div className={`IssueDiv ${openText}`}>
+      <form className={`IssueForm`}
           onSubmit={handleSubmit}>
-      <div>
         <input type='text'
         name='issue'
         className='issue-input'
-        value={value.issue}
-        
+        value={value.issue}        
         placeholder='Issue(max. 120)' 
         onChange={handleChange}
         maxLength="275"
@@ -107,7 +108,7 @@ export const IssueForm = ({addIssue}) => {
 
         <input type='number'
         name='line'
-        className='issue-input'
+        className='issue-line'
         value={value.line}
         placeholder='Line' 
         onChange={handleChange}
@@ -115,15 +116,13 @@ export const IssueForm = ({addIssue}) => {
 
         <input type='text'
         name='component'
-        className='issue-input'
+        className='issue-compo'
         value={value.component}
         placeholder='Component' 
         onChange={handleChange}
         maxLength="50"
         />   
-      </div>
-
-      <div>        
+    <div className='formSelects'>
         <select 
           name="severity"
           value={value.severity}          
@@ -173,7 +172,8 @@ export const IssueForm = ({addIssue}) => {
         <button type='submit'
           //disabled={!isValid}           
           className='issue-btn'>Add issue</button>
-    </form>
+      </form>
+    </div>
   )
 }
 

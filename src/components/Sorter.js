@@ -28,6 +28,9 @@ const Sorter = ({onSort}) => {
         <button type="button" className="sort-btn" onClick={() => handleSort('assignee')}>
             Assignee
         </button>
+        <button type="button" className="sort-btn" onClick={() => handleSort('date')}>
+            Date
+        </button>
     </div>
   )
 }
