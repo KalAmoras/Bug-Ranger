@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { IssueForm } from './IssueForm'
 import { Issue } from './Issue'
-import { v4 as uuidv4 } from 'uuid'
 import { EditIssueForm } from './EditIssueForm'
 import Sorter from './Sorter'
-import Logo from '../assets/BugRangerLogo.svg';
-
-/*TODO: Pie graph, auth, prioritize, better icons, search as component
-navbar, better styling2, date updated
-*/
 
 
-const IssueWrapper = () => {
-    const[issues,setIssues] = useState(()=>{
-        const tempJson = localStorage.getItem("ISSUES")
-        if(tempJson==null) return []
 
-        return JSON.parse(tempJson)
-    })
-    
-    useEffect(()=>{
-        localStorage.setItem("ISSUES", JSON.stringify(issues))
-    },[issues])
-    
+const IssueWrapper = ({issues, setIssues}) => {
+   
     const [query, setQuery] = useState("")
     const [open, setOpen] = useState(false)
 
@@ -148,10 +134,11 @@ const IssueWrapper = () => {
   
   return (
     <div className='IssueWrapper'>
-        <img src={Logo} alt="" className='logo'></img>
         <br></br>
-        <button className={`add-button ${open? 'open' : 'close'}`} onClick={()=>handleButton()}>Add an Issue</button>
-        <IssueForm addIssue={addIssue} openText={open ? 'active' : 'inactive'}/>
+        <div className='IssueForm-background'>
+            <button className={`add-button ${open? 'open' : 'close'}`} onClick={()=>handleButton()}>Add an Issue</button>
+            <IssueForm addIssue={addIssue} openText={open ? 'active' : 'inactive'}/>
+        </div>
         <input className='search-bar'
             placeholder='Search your issue'
             onChange={e=>setQuery(e.target.value)}
