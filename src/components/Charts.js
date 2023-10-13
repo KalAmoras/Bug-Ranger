@@ -51,6 +51,10 @@ const Charts = ({ issues }) => {
           data: Object.values(severityCounts),
           color: ['red', 'blue', 'green'],
           backgroundColor: ['#33b101', '#db4949', '#FFCE56', '#4BC0C0', '#9966FF'],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        },
           datalabels: {
             color: 'white',
             labels: {
@@ -111,12 +115,14 @@ const Charts = ({ issues }) => {
         <h1 className='chart-heading'>Charts</h1>
         <div className='chart-section'>
           <h2 className='chart-title'>Severity</h2>
-          <Pie data={severityData} className='chart' wwidth={400} height={400}/>
+          {/* <Pie data={severityData} className='chart' width={300} height={300} /> */}
+          <Pie data={severityData} className='chart' />
+
         </div>
         <br />
         <div className='chart-section'>
           <h2 className='chart-title'>Priority</h2>
-          <Pie data={priorityData} className='chart' width={400} height={400}/>
+          <Pie data={priorityData} className='chart'/>
         </div>
     </div>
   );

@@ -46,6 +46,8 @@ const IssueWrapper = ({issues, setIssues}) => {
         setIssues(
           issues.map(issue =>
             issue.id === id ? { ...issue, completed: !issue.completed } : issue
+            // issue.statusKey.value === 'Closed' ? { ...issue, completed: !issue.completed } : issue
+
           )
         );
     }

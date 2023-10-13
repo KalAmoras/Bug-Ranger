@@ -1,10 +1,11 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight, faChartSimple } from '@fortawesome/free-solid-svg-icons'
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
-import { faFlag } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faChartSimple, faAngleLeft, faFlag, faQuestion } from '@fortawesome/free-solid-svg-icons'
+
 import { useState } from 'react'
 
+
+const aboutIcon = <FontAwesomeIcon icon={faQuestion} />
 const openIcon = <FontAwesomeIcon icon={faAngleRight} />
 const closeIcon = <FontAwesomeIcon icon={faAngleLeft} />
 const issueIcon = <FontAwesomeIcon icon={faFlag}  />
@@ -24,7 +25,8 @@ const NavBar = () => {
         <ul>
         <a onClick={handleClick}>{openBar? closeIcon : openIcon }</a>
         <CustomLink to="/" >{openBar? issueIcon : "" }</CustomLink>
-        <CustomLink to="/charts" >{openBar? chartsIcon : "" }</CustomLink>          
+        <CustomLink to="/charts" >{openBar? chartsIcon : "" }</CustomLink>  
+        <CustomLink to="/about" >{openBar? aboutIcon : "" }</CustomLink>             
         </ul>        
     </nav>
   )

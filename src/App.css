@@ -9,22 +9,17 @@
   --li-font: hsl(219, 52%, 16%);
   --dk-background: hsl(0, 0%, 0%);
   --dk-primary: hsl(0, 5%, 13%);
-  /* --dk-secondary: hsl(17, 100%, 50%); */
-  /* orange */
-  /* --dk-secondary: #FF9800; */
   --dk-secondary: #c0ff02;
   --dk-font: hsl(0, 0%, 81%);
   --dk-font-secondary: hsl(0, 0%, 100%);
-
-
   --fs-xl: clamp(1rem, 8vw + 1rem, 3rem);
   --fs-l: clamp(0.8rem, 1vw + 1rem, 1rem);
   --fs-regular: clamp(0.6rem, 1vw + 0.5rem, 0.8rem);
   --fs-small: clamp(0.3rem, 1vw + 0.35rem, 0.7rem);  
   --speed: 400ms;
-
+  
   --br-default: 5px;
-
+  
   --og-primary: #8758ff;
   --og-secondary: #1A1A40;
 }
@@ -36,6 +31,8 @@ body {
   font-size: var(--fs-regular);
   z-index: -1;
 }
+
+
 
 .header-logo{
   background-color: var(--dk-background);
@@ -63,13 +60,18 @@ body {
   flex-direction: column;
   top: 20rem;
   left: 2rem;
-  height: 245px;
+  height: 330px;
   width: 52px;
 }
 
 .nav.inactive{
   height: 0px;
   width: 0px;
+}
+.close-bar{
+  width: 0px;
+  height: 0px;
+  opacity: 0;
 }
 
 .fa-angle-left{
@@ -124,10 +126,7 @@ body {
 
 }
 
-.close-bar{
-  width: 0px;
-  height: 0px;
-}
+
 
 .fa-flag:hover,
 .custom-link.active .fa-flag {
@@ -135,7 +134,6 @@ body {
   background: var(--dk-secondary);
   border: 6px solid var(--dk-background);
   color: var(--dk-background);
-
 }
 
 .fa-chart-simple{
@@ -164,10 +162,35 @@ body {
   color: var(--dk-background);
 }
 
+.fa-question{
+  position: fixed;
+  margin-top: 213px;
+  margin-left: -33.8px;
+  padding: 0.5rem;
+  color: var(--dk-background);
+  border-radius: 50%;
+  border-color: var(--dk-font-secondary);
+  background-color: var(--dk-primary);
+  background-position: center;
+  background-clip: padding-box;
+  color:var(--dk-secondary);
+  font-size: 23px;
+  height: 23px;
+  width: 23px;
+}
+
+.fa-question:hover,
+.custom-link.active .fa-question{
+  transform: scale(110%) translateX(0.8em);
+  background: var(--dk-secondary);
+  border: 6px solid var(--dk-background);
+  color: var(--dk-background);
+}
 
 
 
-/*ISSUE WRAPPER*/
+
+/*ISSUE WRAPPER---------------------------------------------------------------------------------------------*/
 
 .IssueWrapper {
   width: clamp(300px, 90vw, 700px) ;
@@ -357,6 +380,7 @@ select{
   margin-right: 0.5rem;
   width: 6rem;
   height: 2rem;
+  font-weight: bold;
 }
 
 .search-bar{
@@ -408,11 +432,96 @@ select{
   "buttons-box buttons-box bug-date";
 }
 
+.completed {
+  background: var(--dk-background);
+  color:var(--dk-font);
+  border-radius: 5px;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 16rem 1fr 6rem;
+  grid-template-rows: minmax(5.2rem, 10rem) minmax(1rem, 3rem) 3rem;
+  grid-template-areas: 
+  "bug-texts bug-texts bug-selects"
+  "bug-line bug-module bug-selects"
+  "buttons-box buttons-box bug-date";
+  opacity: 0.4;
+}
+
+
+
+@media(max-width: 900px){
+  .nav{
+    position:relative;
+    flex-direction: row;
+    top: 1rem;
+    left: 0;
+    right: 2rem;
+    height: 52px;
+    width: 310px;
+    margin-bottom: 3rem;
+  }
+
+  .fa-flag {
+    position: absolute;
+    top: -4rem;
+    margin-left: 2.8rem;  
+  }
+
+  .fa-flag:hover,
+  .custom-link.active .fa-flag {
+  transform: scale(110%) translateY(0.8em);
+  background: var(--dk-secondary);
+  border: 6px solid var(--dk-background);
+  color: var(--dk-background);
+
+  }
+
+  .fa-chart-simple{
+    position: absolute;
+    top: -8.5rem;
+    margin-left: 8rem; 
+  }
+  
+  .fa-chart-simple:hover,
+  .custom-link.active .fa-chart-simple{
+    transform: scale(110%) translateY(0.8em);
+    background: var(--dk-secondary);
+    border: 6px solid var(--dk-background);
+    color: var(--dk-background);
+  }
+
+  .fa-angle-left{
+    position: relative;
+    margin-top: -6px;
+    margin-left: -33.5px;
+  }
+  
+  .fa-angle-right{
+    position: relative;
+    margin-top: -6px;
+    margin-left: -33.5px;
+  }
+
+  .fa-question{
+    position: absolute;
+    top: -13rem;
+    margin-left: 13.2rem; 
+  }
+
+  .fa-question:hover,
+  .custom-link.active .fa-question{
+    transform: scale(110%) translateY(0.8em);
+    background: var(--dk-secondary);
+    border: 6px solid var(--dk-background);
+    color: var(--dk-background);
+  }
+}
+
 @media(max-width: 620px){
   .Issue{
     grid-template-columns: minmax(4rem, auto) minmax(3rem, 9rem) minmax(1rem, 5rem);
-    grid-template-rows: minmax(3rem, auto) 0.5fr 0.47fr
-    1.8rem;
+    grid-template-rows: minmax(3rem, auto) 0.5fr 0.47fr 1.8rem;
     grid-template-areas: 
     "bug-texts bug-texts bug-texts"
     "bug-line bug-line bug-selects"
@@ -422,7 +531,7 @@ select{
     .bug-date{
       grid-area: bug-date;
       margin-bottom: minmax(0.4rem, 1rem);
-      margin-right: 0.4rem;      
+      margin-right: 0.4rem;   
     }
     
     .bug-line{
@@ -435,10 +544,60 @@ select{
 
     .bug-selects{
       border-radius: 5px 0px 0px 5px;
+    }       
+  }
+
+  .completed{
+    display: grid;
+    grid-template-columns: minmax(8.2rem, auto) minmax(8rem, 9rem);
+    grid-template-rows: 3fr 0.5fr 0.3fr;
+    grid-template-areas: 
+    "bug-texts bug-texts"
+    "bug-line bug-module"
+    "buttons-box bug-date";
+    height: 12rem;
+    overflow: hidden;
+    
+    .bug-texts{
+      overflow: hidden;
+    } 
+
+    .bug-selects{
+      display: none; 
+
     }
+  }
+
+  .header-logo{
+    justify-content: center;
+    justify-items: center;
     
   }
+  
+  .logo{
+    justify-self: center;
+    color: #FF9800;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 0rem;
+    padding: 1rem;
+  }
+
+  canvas{
+    width:200px !important;
+    height:200px !important;
+    position: relative;
+    align-self: center;
+    margin-left: clamp(2rem, 2rem + 5vw, 3rem)
+  } 
+  .about-section{
+    text-wrap: wrap;
+    color:white;
+    font-size: small;
+  }
 }
+  
+
 
 
 .bug-texts{
@@ -544,40 +703,23 @@ p{
   /* color: #33b101; */
 }
 
-.completed {
-  display: flex;
-  position: relative;
-  background:#1A1A40;
-  color: #fff;
-  border: 1px solid #8758ff;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-  flex-direction: column;
-  color: #c5aeff;
-  text-decoration: line-through;
-}
-
 
 .chart-wrapper{
   background-color: var(--dk-primary);
-  width: 500px;
   overflow:visible;
   border-radius: 5px;
-  display: flex; /* Use flexbox to center the content */
+  display: flex; 
   flex-direction: column;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 .chart-heading{
-  align-self: baseline;
+  /* align-self: baseline; */
   margin-left: 1.6rem;
   margin-top: 1rem;
   background: linear-gradient(170deg, var(--dk-background),var(--dk-primary));
-  padding: 0.6rem 3rem 0.6rem 1rem;
+  padding: 0.6rem 1rem 0.6rem 1rem;
   border-radius: 50px;
   box-shadow: inset 1.6px 3px 3px 0.1px var(--dk-font-secondary);
 
@@ -596,4 +738,19 @@ p{
   border-radius: 50px;
   text-align: center;
   box-shadow: inset 1px 2px 3px 0.1px var(--dk-font-secondary);
+}
+
+.chart{
+  width: 300px;
+  height: 300px;
+}
+
+.about-section{
+  width: 50vw;
+}
+
+.about-text{
+  text-wrap: wrap;
+  color:white;
+  font-size: var(--fs-l);
 }

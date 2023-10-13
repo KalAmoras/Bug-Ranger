@@ -6,11 +6,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
    return (
-    <div className={`${issue.completed ? 'completed' : "Issue"}`} >
+    <div className={`${issue.completed ? 'completed' : "Issue"}`}>
         <div className='bug-texts'>
-          <label className='bug-title'>Issue</label>
-          <p className="bug-issue" 
-            onClick={() => toggleComplete(issue.id)}
+          <label className='bug-title' onClick={() => toggleComplete(issue.id)}>Issue</label>
+          <p className="bug-issue"
             >{issue.issue}</p>
         </div>
         <div className='bug-line'>
@@ -23,8 +22,6 @@ export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
         </div>
 
         <div className='bug-selects'>
-          {/*<label className='bug-title-select'>Error</label>
-          <p className='bug-select'>{issue.error}</p>*/}
           <label className='bug-title-select'>Severity</label>
           <p className='bug-select'>{issue.severity}</p>
           <label className='bug-title-select'>Priority</label>
@@ -41,5 +38,6 @@ export const Issue = ({issue, toggleComplete, editIssue, deleteIssue}) => {
         </div>
         <label className="bug-date">Date Created: {issue.date}</label>
     </div>
+    
   )
 }

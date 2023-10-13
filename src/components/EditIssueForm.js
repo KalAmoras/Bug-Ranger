@@ -61,6 +61,7 @@ export const EditIssueForm = ({editBug, issuePrev, idIssue, onCancel}) => {
     })
     return formRef
   }
+  
 
   const handleClick = () =>{
              
