@@ -1,7 +1,10 @@
 {
   "name": "bug-ranger",
   "version": "0.1.0",
+<<<<<<< HEAD
   "homepage": "https://kaltestes.github.io/bug-ranger-d",
+=======
+>>>>>>> f46a80cdd91e03f15e53759a916433f48d42a974
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -13,18 +16,28 @@
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.4.0",
     "chartjs-plugin-datalabels": "^2.2.0",
+<<<<<<< HEAD
     "gh-pages": "^6.0.0",
+=======
+>>>>>>> f46a80cdd91e03f15e53759a916433f48d42a974
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
+<<<<<<< HEAD
     "react-scripts": "^3.0.1",
+=======
+    "react-scripts": "^5.0.1",
+>>>>>>> f46a80cdd91e03f15e53759a916433f48d42a974
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+<<<<<<< HEAD
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+=======
+>>>>>>> f46a80cdd91e03f15e53759a916433f48d42a974
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
