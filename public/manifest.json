@@ -1,0 +1,8 @@
+{
+  "short_name": "Bug Ranger",
+  "name": "Bug Ranger App",
+  "start_url": "/bug-ranger-d/",
+  "display": "standalone",
+  "theme_color": "#007ACC",
+  "background_color": "#FFFFFF"
+}
